@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Warrior Dome</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#0b0b0b;
+color:white;
+text-align:center;
+}
+
+header{
+background:#111;
+padding:20px;
+font-size:32px;
+letter-spacing:2px;
+}
+
+nav{
+background:#1a1a1a;
+padding:10px;
+}
+
+nav button{
+padding:10px 18px;
+margin:5px;
+font-size:16px;
+cursor:pointer;
+border:none;
+background:#444;
+color:white;
+}
+
+nav button:hover{
+background:#666;
+}
+
+.page{
+display:none;
+padding:30px;
+}
+
+.active{
+display:block;
+}
+
+#arena{
+width:900px;
+max-width:95%;
+height:420px;
+background:#222;
+margin:auto;
+position:relative;
+border:5px solid white;
+overflow:hidden;
+}
+
+.fighter{
+width:60px;
+height:60px;
+position:absolute;
+bottom:0;
+}
+
+#player{
+background:red;
+left:120px;
+}
+
+#enemy{
+background:blue;
+left:650px;
+}
+
+.health{
+font-size:22px;
+margin-top:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>⚔️ WARRIOR DOME ⚔️</header>
+
+<nav>
+<button onclick="openPage('home')">Home</button>
+<button onclick="openPage('play')">Play</button>
+<button onclick="openPage('characters')">Characters</button>
+<button onclick="openPage('powers')">Powers</button>
+<button onclick="openPage('levels')">Levels</button>
+</nav>
+
+<!-- HOME -->
+
+<div id="home" class="page active">
+
+<h2>Welcome to Warrior Dome</h2>
+
+<p>Fight powerful warriors and reach the final battle.</p>
+
+<p>Defeat enemies to unlock powers and reach <b>Level 100: Elexus Boss</b>.</p>
+
+</div>
+
+<!-- PLAY -->
+
+<div id="play" class="page">
+
+<h2>Arena Battle</h2>
+
+<p>Controls: A / D = Move | W = Attack</p>
+
+<div id="arena">
+
+<div id="player" class="fighter"></div>
+<div id="enemy" class="fighter"></div>
+
+</div>
+
+<div class="health">
+Player HP: <span id="hp1">100</span>
+Enemy HP: <span id="hp2">100</span>
+</div>
+
+</div>
+
+<!-- CHARACTERS -->
+
+<div id="characters" class="page">
+
+<h2>Warriors</h2>
+
+<p>🔥 Flame Warrior – Fire attacks</p>
+<p>⚡ Storm Fighter – Lightning speed</p>
+<p>🧊 Ice Guardian – Freeze enemies</p>
+<p>👑 Elexus – Level 100 Boss</p>
+
+</div>
+
+<!-- POWERS -->
+
+<div id="powers" class="page">
+
+<h2>Special Powers</h2>
+
+<p>🔥 Fire Blast</p>
+<p>⚡ Thunder Strike</p>
+<p>🧊 Ice Freeze</p>
+<p>💥 Energy Wave</p>
+
+</div>
+
+<!-- LEVELS -->
+
+<div id="levels" class="page">
+
+<h2>Game Levels</h2>
+
+<p>Level 1 – Training Arena</p>
+<p>Level 10 – Desert Arena</p>
+<p>Level 25 – Ice Temple</p>
+<p>Level 50 – Shadow Dome</p>
+<p>Level 100 – Elexus Final Boss</p>
+
+</div>
+
+<script>
+
+function openPage(id){
+
+document.querySelectorAll(".page").forEach(p=>{
+p.classList.remove("active")
+})
+
+document.getElementById(id).classList.add("active")
+
+}
+
+let player=document.getElementById("player")
+let enemy=document.getElementById("enemy")
+
+let px=120
+let ex=650
+
+let hp1=100
+let hp2=100
+
+document.addEventListener("keydown",e=>{
+
+if(e.key=="a") px-=20
+if(e.key=="d") px+=20
+
+if(e.key=="w"){
+
+if(Math.abs(px-ex)<80){
+
+hp2-=10
+document.getElementById("hp2").innerText=hp2
+
+if(hp2<=0){
+alert("Enemy Defeated!")
+hp2=100
+}
+
+}
+
+}
+
+player.style.left=px+"px"
+
+})
+
+</script>
+
+</body>
+</html>
